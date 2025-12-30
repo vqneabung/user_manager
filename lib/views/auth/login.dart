@@ -15,10 +15,15 @@ class LoginPageState extends State<LoginPage> {
     return Form(
       key: formKey,
       child: Padding(
-        padding: EdgeInsets.all(0),
+        padding: EdgeInsets.symmetric(horizontal: 10.0),
         child: Column(
           children: <Widget>[
             TextFormField(
+              decoration: const InputDecoration(
+                icon: Icon(Icons.email),
+                hintText: "Enter your email!",
+                labelText: "Email",
+              ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your email!';
@@ -27,6 +32,11 @@ class LoginPageState extends State<LoginPage> {
               },
             ),
             TextFormField(
+              decoration: const InputDecoration(
+                icon: Icon(Icons.password),
+                hintText: "Enter your password!",
+                labelText: "Password",
+              ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your password!';
@@ -34,13 +44,16 @@ class LoginPageState extends State<LoginPage> {
                 return null;
               },
             ),
-            ElevatedButton(
-              onPressed: () => {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Login Successfully!")),
-                ),
-              },
-              child: const Text("Submit"),
+            Padding(
+              padding: EdgeInsetsGeometry.symmetric(vertical: 5.0),
+              child: ElevatedButton(
+                onPressed: () => {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Login Successfully!")),
+                  ),
+                },
+                child: const Text("Submit"),
+              ),
             ),
           ],
         ),
