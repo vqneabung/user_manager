@@ -2,26 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:user_manager/main.dart';
 import 'package:user_manager/views/auth/login.dart';
-import 'package:user_manager/widgets/navigation_bar.dart';
-
-// final routes = GoRouter(
-//   routes: [
-//     GoRoute(
-//       path: "/",
-//       builder: (context, state) =>
-//           const HomePage(title: 'Flutter Demo Home Page'),
-//     ),
-//     GoRoute(path: "/login", builder: (context, state) => const LoginPage()),
-//   ],
-// );
+import 'package:user_manager/views/home.dart';
 
 class StatefulShellRouteApp extends StatelessWidget {
   const StatefulShellRouteApp({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    throw UnimplementedError();
+    return MaterialApp.router(title: "First Flutter App", routerConfig: routes);
   }
 }
 
@@ -35,9 +23,27 @@ final routes = GoRouter(
             GoRouterState state,
             StatefulNavigationShell navigationShell,
           ) {
-            return BottumNavigationBar(navigationShell: navigationShell);
+            return App(navigationShell: navigationShell);
           },
-      branches: [StatefulShellBranch(routes: [])],
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: "/",
+              builder: (context, state) =>
+                  const HomePage(title: 'Flutter Demo Home Page'),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: "/login",
+              builder: (context, state) => const LoginPage(),
+            ),
+          ],
+        ),
+      ],
     ),
   ],
 );

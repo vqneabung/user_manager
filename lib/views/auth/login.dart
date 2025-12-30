@@ -1,15 +1,4 @@
-
 import 'package:flutter/material.dart';
-
-class Login extends StatelessWidget {
-  const Login({super.key});
-  
-  @override
-  Widget build(BuildContext context) {
-    throw UnimplementedError();
-  }
- 
-}
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,8 +8,43 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    throw UnimplementedError();
+    return Form(
+      key: formKey,
+      child: Padding(
+        padding: EdgeInsets.all(0),
+        child: Column(
+          children: <Widget>[
+            TextFormField(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your email!';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your password!';
+                }
+                return null;
+              },
+            ),
+            ElevatedButton(
+              onPressed: () => {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Login Successfully!")),
+                ),
+              },
+              child: const Text("Submit"),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
