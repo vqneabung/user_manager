@@ -8,7 +8,7 @@ import 'package:user_manager/domain/dtos/response/login_response.dart';
 
 part 'auth_client.g.dart';
 
-@RestApi(baseUrl: ApiConstants.authBaseUrl)
+@RestApi()
 abstract class AuthClient{
     factory AuthClient(Dio dio, {String baseUrl}) = _AuthClient;
 
@@ -16,3 +16,4 @@ abstract class AuthClient{
     Future<BaseResponse<LoginResponse>> loginResponse();
     
 }
+

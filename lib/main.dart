@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:user_manager/config/injection.dart';
 import 'package:user_manager/navigation.dart';
 
-//Set up GetIT
-final GetIt locator = GetIt.instance();
 
-//Setup locator
-void setupLocator() {
-  
-}
 
 Future<void> main() async {
-  setupLocator();
+  configureDependencies();
   runApp(const StatefulShellRouteApp());
 }
 
