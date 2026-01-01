@@ -1,5 +1,6 @@
 
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import 'package:user_manager/constaints/api_constants.dart';

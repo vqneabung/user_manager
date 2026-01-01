@@ -6,9 +6,10 @@ import 'package:user_manager/navigation.dart';
 
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   runApp(const StatefulShellRouteApp());
-}
+} 
 
 class App extends StatelessWidget {
   const App({super.key, required this.navigationShell});
