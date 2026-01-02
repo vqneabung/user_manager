@@ -23,7 +23,7 @@ final routes = GoRouter(
             GoRouterState state,
             StatefulNavigationShell navigationShell,
           ) {
-            return RootApp(navigationShell: navigationShell);
+            return App(navigationShell: navigationShell);
           },
       branches: [
         StatefulShellBranch(
