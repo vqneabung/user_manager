@@ -20,7 +20,7 @@ class _AuthClient implements AuthClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<BaseResponse<LoginResponse>> loginResponse() async {
+  Future<BaseResponse<LoginResponse>> login(LoginRequest loginRequest) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

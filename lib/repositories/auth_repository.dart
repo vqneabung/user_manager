@@ -15,7 +15,11 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({required this.authClient});
 
   @override
-  Future<BaseResponse<LoginResponse>> login(LoginRequest loginRequest) {
-    return authClient.loginResponse();
+  Future<BaseResponse<LoginResponse>> login(LoginRequest loginRequest) async {
+    try {
+      return await authClient.login(loginRequest);
+    } catch (e) {
+      return BaseResponse(success: false, errors: e.toString(), data: null);
+    }
   }
 }

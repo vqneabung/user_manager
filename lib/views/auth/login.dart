@@ -10,6 +10,9 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
 
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -48,9 +51,9 @@ class LoginPageState extends State<LoginPage> {
               padding: EdgeInsetsGeometry.symmetric(vertical: 5.0),
               child: ElevatedButton(
                 onPressed: () => {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Login Successfully!")),
-                  ),
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //   const SnackBar(content: Text("Login Successfully!")),
+                  // ),
                 },
                 child: const Text("Submit"),
               ),
