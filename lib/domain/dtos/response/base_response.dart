@@ -5,8 +5,8 @@ part 'base_response.g.dart';
 
 @JsonSerializable(genericArgumentFactories: true)
 class BaseResponse<T> {
-    bool? success;
-    String? errors;
+    bool? success = false;
+    String? errors = "";
     T? data;
 
     BaseResponse({required this.success, required this.errors, required this.data});

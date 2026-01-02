@@ -5,17 +5,17 @@ import 'package:user_manager/domain/dtos/response/login_response.dart';
 import 'package:user_manager/network/auth/auth_client.dart';
 
 abstract class AuthRepository {
-  Future<BaseResponse<LoginResponse>> loginResponse(LoginRequest loginRequest);
+  Future<BaseResponse<LoginResponse>> login(LoginRequest loginRequest);
 }
 
 @Injectable()
-class AuthRepositoryImp implements AuthRepository {
+class AuthRepositoryImpl implements AuthRepository {
   final AuthClient authClient;
 
-  AuthRepositoryImp({required this.authClient});
+  AuthRepositoryImpl({required this.authClient});
 
   @override
-  Future<BaseResponse<LoginResponse>> loginResponse(LoginRequest loginRequest) {
+  Future<BaseResponse<LoginResponse>> login(LoginRequest loginRequest) {
     return authClient.loginResponse();
   }
 }

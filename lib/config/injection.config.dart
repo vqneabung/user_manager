@@ -29,8 +29,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i974.AuthClient>(
       () => networkModule.authClient(gh<_i361.Dio>()),
     );
-    gh.factory<_i1002.AuthRepositoryImp>(
-      () => _i1002.AuthRepositoryImp(authClient: gh<_i974.AuthClient>()),
+    gh.factory<_i1002.AuthRepositoryImpl>(
+      () => _i1002.AuthRepositoryImpl(authClient: gh<_i974.AuthClient>()),
     );
     return this;
   }
