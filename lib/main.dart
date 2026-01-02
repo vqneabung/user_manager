@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:user_manager/config/injection.dart';
 import 'package:user_manager/navigation.dart';
-
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
-  runApp(const StatefulShellRouteApp());
-} 
+  runApp(const ProviderScope(child: StatefulShellRouteApp()));
+}
 
-class App extends StatelessWidget {
-  const App({super.key, required this.navigationShell});
+class RootApp extends StatelessWidget {
+  const RootApp({super.key, required this.navigationShell});
 
   final StatefulNavigationShell navigationShell;
 
