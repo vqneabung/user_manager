@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:user_manager/config/injection.dart';
+import 'package:user_manager/domain/dtos/request/login_request.dart';
+import 'package:user_manager/domain/dtos/response/login_response.dart';
+import 'package:user_manager/viewmodels/auth/login_view_model.dart';
+import 'package:user_manager/viewmodels/state/load_data_state.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,6 +21,17 @@ class LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => getIt<LoginViewModel>(),
+      child: BlocBuilder<LoginViewModel, LoadDataState<LoginResponse>>(
+        builder: (context, state) {
+          return loginPage(context, state);
+        },
+      ),
+    );
+  }
+
+  Widget loginPage(BuildContext context, LoadDataState state) {
     return Form(
       key: formKey,
       child: Padding(
@@ -22,6 +39,7 @@ class LoginPageState extends State<LoginPage> {
         child: Column(
           children: <Widget>[
             TextFormField(
+              controller: _emailController,
               decoration: const InputDecoration(
                 icon: Icon(Icons.email),
                 hintText: "Enter your email!",
@@ -35,6 +53,7 @@ class LoginPageState extends State<LoginPage> {
               },
             ),
             TextFormField(
+              controller: _passwordController,
               decoration: const InputDecoration(
                 icon: Icon(Icons.password),
                 hintText: "Enter your password!",
@@ -50,13 +69,41 @@ class LoginPageState extends State<LoginPage> {
             Padding(
               padding: EdgeInsetsGeometry.symmetric(vertical: 5.0),
               child: ElevatedButton(
-                onPressed: () => {
-                  // ScaffoldMessenger.of(context).showSnackBar(
-                  //   const SnackBar(content: Text("Login Successfully!")),
-                  // ),
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    final loginRequest = LoginRequest(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                    );
+                    context.read<LoginViewModel>().login(loginRequest, context);
+                  }
                 },
                 child: const Text("Submit"),
               ),
+            ),
+            state.maybeWhen(
+              initial: () {
+                return const SizedBox();
+              },
+              loading: () {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(const SnackBar(content: Text("Loading...")));
+                return const SizedBox();
+              },
+              success: (response) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Login Successfully!")),
+                );
+                return const SizedBox();
+              },
+              error: (error) {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(const SnackBar(content: Text("Login Failed!")));
+                return const SizedBox();
+              },
+              orElse: () => const SizedBox(),
             ),
           ],
         ),

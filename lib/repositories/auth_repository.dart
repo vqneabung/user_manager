@@ -8,7 +8,7 @@ abstract class AuthRepository {
   Future<BaseResponse<LoginResponse>> login(LoginRequest loginRequest);
 }
 
-@Injectable()
+@LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {
   final AuthClient authClient;
 

@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:user_manager/domain/dtos/request/login_request.dart';
 import 'package:user_manager/domain/dtos/response/base_response.dart';
 import 'package:user_manager/domain/dtos/response/login_response.dart';
@@ -7,6 +8,7 @@ abstract class AuthService {
   Future<BaseResponse<LoginResponse>> login(LoginRequest loginRequest);
 }
 
+@LazySingleton(as: AuthService)
 class AuthServiceImpl implements AuthService {
   final AuthRepository authRepository;
 

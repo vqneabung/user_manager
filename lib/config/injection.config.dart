@@ -16,6 +16,8 @@ import 'package:injectable/injectable.dart' as _i526;
 import '../network/auth/auth_client.dart' as _i974;
 import '../network/network_module.dart' as _i200;
 import '../repositories/auth_repository.dart' as _i1002;
+import '../services/auth_service.dart' as _i745;
+import '../viewmodels/auth/login_view_model.dart' as _i563;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -29,8 +31,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i974.AuthClient>(
       () => networkModule.authClient(gh<_i361.Dio>()),
     );
-    gh.factory<_i1002.AuthRepositoryImpl>(
+    gh.lazySingleton<_i1002.AuthRepository>(
       () => _i1002.AuthRepositoryImpl(authClient: gh<_i974.AuthClient>()),
+    );
+    gh.lazySingleton<_i745.AuthService>(
+      () => _i745.AuthServiceImpl(authRepository: gh<_i1002.AuthRepository>()),
+    );
+    gh.factory<_i563.LoginViewModel>(
+      () => _i563.LoginViewModel(gh<_i745.AuthService>()),
     );
     return this;
   }
