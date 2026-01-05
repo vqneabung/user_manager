@@ -15,7 +15,7 @@ abstract class AuthClient{
     factory AuthClient(Dio dio, {String baseUrl}) = _AuthClient;
 
     @POST('/login')
-    Future<BaseResponse<LoginResponse>> login(LoginRequest loginRequest);
+    Future<BaseResponse<LoginResponse>> login(@Body() LoginRequest loginRequest);
     
 }
 

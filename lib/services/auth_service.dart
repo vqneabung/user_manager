@@ -24,7 +24,7 @@ class AuthServiceImpl implements AuthService {
         data: result.data,
       );
     } else {
-      return BaseResponse(success: true, errors: "Login Failed!", data: null);
+      return BaseResponse(success: false, errors: result.errors, data: null);
     }
   }
 }

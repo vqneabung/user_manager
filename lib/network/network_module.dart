@@ -5,15 +5,20 @@ import 'package:user_manager/network/auth/auth_client.dart';
 
 @module
 abstract class NetworkModule {
-
   @lazySingleton
-  Dio dio(){
-    return Dio();
+  Dio dio() {
+    return Dio(
+      BaseOptions(
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      ),
+    );
   }
 
   @lazySingleton
-  AuthClient authClient(Dio dio){
+  AuthClient authClient(Dio dio) {
     return AuthClient(dio, baseUrl: ApiConstants.authBaseUrl);
   }
-
 }

@@ -33,10 +33,10 @@ class LoginViewModel extends Cubit<LoadDataState<LoginResponse>> {
       }
     } else {
       if (context.mounted) {
-        emit(LoadDataState.error(error: ""));
+        emit(LoadDataState.error(error: result.errors));
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text("Login Failed!")));
+        ).showSnackBar(SnackBar(content: Text("${result.errors}")));
       }
     }
     // setLoginLoading(false);

@@ -86,22 +86,22 @@ class LoginPageState extends State<LoginPage> {
                 return const SizedBox();
               },
               loading: () {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(const SnackBar(content: Text("Loading...")));
+                // ScaffoldMessenger.of(
+                //   context,
+                // ).showSnackBar(const SnackBar(content: Text("Loading...")));
                 return const SizedBox();
               },
               success: (response) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Login Successfully!")),
-                );
-                return const SizedBox();
+                // ScaffoldMessenger.of(context).showSnackBar(
+                //   const SnackBar(content: Text("Login Successfully!")),
+                // );
+                return const Text("Successfully!");
               },
               error: (error) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(const SnackBar(content: Text("Login Failed!")));
-                return const SizedBox();
+                // ScaffoldMessenger.of(
+                //   context,
+                // ).showSnackBar(const SnackBar(content: Text("Login Failed!")));
+                return Text(error!);
               },
               orElse: () => const SizedBox(),
             ),

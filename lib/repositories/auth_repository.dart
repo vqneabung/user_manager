@@ -17,7 +17,8 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<BaseResponse<LoginResponse>> login(LoginRequest loginRequest) async {
     try {
-      return await authClient.login(loginRequest);
+      var result = await authClient.login(loginRequest);
+      return result;
     } catch (e) {
       return BaseResponse(success: false, errors: e.toString(), data: null);
     }
