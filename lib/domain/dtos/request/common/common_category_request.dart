@@ -1,0 +1,3 @@
+class CommonCategoryRequest {
+    String? name;
+}
