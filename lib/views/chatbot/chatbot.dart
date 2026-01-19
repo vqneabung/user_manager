@@ -48,22 +48,32 @@ class ChatbotState extends State<Chatbot> {
       );
     }).toList();
 
+    var newAssistantMessage = TextMessage(
+      id: IdGenerator.generate(),
+      authorId: 'assistant',
+      createdAt: DateTime.now().toUtc(),
+      text: 'Đang xử lý...',
+    ); 
+
+    _chatController.insertMessage(newAssistantMessage);
+
     var response = await chatService.sendMessage(chatMessages );
 
     if (response.success == true && response.data != null) {
       // Thêm tin nhắn phản hồi từ bot vào giao diện chat
       print('Phản hồi từ chatbot: ${response.data}');
-      _chatController.insertMessage(
-        TextMessage(
-          id: IdGenerator.generate(),
-          authorId: 'assistant',
-          createdAt: DateTime.now().toUtc(),
-          text: response.data!,
-        ),
-      );
+      // _chatController.insertMessage(
+      //   TextMessage(
+      //     id: IdGenerator.generate(),
+      //     authorId: 'assistant',
+      //     createdAt: DateTime.now().toUtc(),
+      //     text: response.data!,
+      //   ),
+      // );
+      _chatController.updateMessage(newAssistantMessage, TextMessage(id: newAssistantMessage.id, authorId: newAssistantMessage.authorId, text: response.data!));
     } else {
       // Xử lý lỗi nếu cần thiết
-      print('Lỗi khi gửi tin nhắn đến chatbot: ${response.errors}');
+      _chatController.updateMessage(newAssistantMessage, TextMessage(id: newAssistantMessage.id, authorId: newAssistantMessage.authorId, text: 'Đã có lỗi xảy ra khi liên lạc với chatbot.'));
     }
   }
 
