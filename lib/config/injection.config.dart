@@ -25,6 +25,7 @@ import '../repositories/product_repository.dart' as _i400;
 import '../repositories/unit_of_work.dart' as _i990;
 import '../services/auth_service.dart' as _i745;
 import '../viewmodels/auth/login_view_model.dart' as _i563;
+import '../viewmodels/chatbot/chatbot_view_model.dart' as _i469;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -34,6 +35,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final networkModule = _$NetworkModule();
+    gh.factory<_i469.ChatbotViewModel>(() => _i469.ChatbotViewModel());
     gh.lazySingleton<_i361.Dio>(() => networkModule.dio());
     gh.lazySingleton<_i974.AuthClient>(
       () => networkModule.authClient(gh<_i361.Dio>()),

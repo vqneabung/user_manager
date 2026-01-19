@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:user_manager/main.dart';
 import 'package:user_manager/views/auth/login.dart';
+import 'package:user_manager/views/chatbot/chatbot.dart';
 import 'package:user_manager/views/home.dart';
 
 class StatefulShellRouteApp extends StatelessWidget {
@@ -41,6 +42,11 @@ final routes = GoRouter(
               path: "/login",
               builder: (context, state) => const LoginPage(),
             ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(path: "/chatbot", builder: (context, state) => Chatbot()),
           ],
         ),
       ],

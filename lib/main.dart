@@ -3,13 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:user_manager/config/injection.dart';
 import 'package:user_manager/navigation.dart';
 
-
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   runApp(const StatefulShellRouteApp());
-} 
+}
 
 class App extends StatelessWidget {
   const App({super.key, required this.navigationShell});
@@ -29,6 +27,10 @@ class App extends StatelessWidget {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.login), label: 'Login'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat_bubble),
+            label: 'Chatbot',
+          ),
         ],
         currentIndex: navigationShell.currentIndex,
         onTap: (int tappedIndex) {
