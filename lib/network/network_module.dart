@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:user_manager/constaints/api_constants.dart';
 import 'package:user_manager/network/auth/auth_client.dart';
+import 'package:user_manager/network/chat/chat_client.dart';
 import 'package:user_manager/network/store/category_client.dart';
 import 'package:user_manager/network/store/order_client.dart';
 import 'package:user_manager/network/store/product_client.dart';
@@ -39,6 +40,11 @@ abstract class NetworkModule {
   @lazySingleton
   ProductClient productClient(Dio dio) {
     return ProductClient(dio, baseUrl: Url.storeUrl('products'));
+  }
+
+  @lazySingleton
+  ChatClient chatClient(Dio dio) {
+    return ChatClient(dio, baseUrl: ApiConstants.chatBaseUrl);
   }
 }
 

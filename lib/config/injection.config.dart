@@ -14,16 +14,19 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../network/auth/auth_client.dart' as _i974;
+import '../network/chat/chat_client.dart' as _i912;
 import '../network/network_module.dart' as _i200;
 import '../network/store/category_client.dart' as _i263;
 import '../network/store/order_client.dart' as _i745;
 import '../network/store/product_client.dart' as _i699;
 import '../repositories/auth_repository.dart' as _i1002;
 import '../repositories/category_repository.dart' as _i38;
+import '../repositories/chat_repository.dart' as _i1054;
 import '../repositories/order_repository.dart' as _i344;
 import '../repositories/product_repository.dart' as _i400;
 import '../repositories/unit_of_work.dart' as _i990;
 import '../services/auth_service.dart' as _i745;
+import '../services/chat_service.dart' as _i698;
 import '../viewmodels/auth/login_view_model.dart' as _i563;
 import '../viewmodels/chatbot/chatbot_view_model.dart' as _i469;
 
@@ -48,6 +51,15 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i699.ProductClient>(
       () => networkModule.productClient(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i912.ChatClient>(
+      () => networkModule.chatClient(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i1054.ChatRepository>(
+      () => _i1054.ChatRepositoryImpl(chatClient: gh<_i912.ChatClient>()),
+    );
+    gh.lazySingleton<_i698.ChatService>(
+      () => _i698.ChatServiceImpl(chatRepository: gh<_i1054.ChatRepository>()),
     );
     gh.lazySingleton<_i344.OrderRepository>(
       () => _i344.OrderRepositoryImpl(orderClient: gh<_i745.OrderClient>()),
